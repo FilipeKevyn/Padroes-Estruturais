@@ -1,0 +1,24 @@
+@startuml
+interface Documento {
+    + exibir()
+}
+
+class DocumentoConfidencial implements Documento {
+    - conteudo: String
+    - carregarDoDisco()
+    + DocumentoConfidencial(conteudo: String)
+    + exibir()
+}
+
+class ProxyDocumento implements Documento {
+    - documentoConfidencial: DocumentoConfidencial
+    - conteudo: String
+    - acessoPermitido: boolean
+    + ProxyDocumento(conteudo: String, acessoPermitido: boolean)
+    + exibir()
+}
+
+Documento <|.. DocumentoConfidencial
+Documento <|.. ProxyDocumento
+ProxyDocumento ..> DocumentoConfidencial : "Cria sob demanda"
+@enduml
