@@ -1,0 +1,27 @@
+@startuml
+
+class Estoque {
+    + verificarDisponibilidade(produto: String)
+}
+
+class Pagamento {
+    + processarPagamento(valor: double)
+}
+
+class Entrega {
+    + despacharPedido(produto: String)
+}
+
+class PedidoFacade {
+    - estoque: Estoque
+    - pagamento: Pagamento
+    - entrega: Entrega
+    + PedidoFacade()
+    + realizarPedido(produto: String, valor: double)
+}
+
+PedidoFacade ..> Estoque : "Usa"
+PedidoFacade ..> Pagamento : "Usa"
+PedidoFacade ..> Entrega : "Usa"
+
+@enduml
