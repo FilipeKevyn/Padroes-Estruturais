@@ -1,11 +1,29 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
-autonumber
+interface Pagamento {
+    + processarPagamento(valor: double)
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+class PagamentoBanco implements Pagamento {
+    + processarPagamento(valor: double)
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+class PagamentoPayPal {
+    + realizarTransacao(quantia: double)
+}
+
+class PagamentoPayPalAdapter implements Pagamento {
+    - pagamentoPayPal: PagamentoPayPal
+    + processarPagamento(valor: double)
+}
+
+class Main {
+    + main(args: String[])
+}
+
+Pagamento <|.. PagamentoBanco
+Pagamento <|.. PagamentoPayPalAdapter
+PagamentoPayPalAdapter ..> PagamentoPayPal : "Adapta chamada para"
+Main ..> Pagamento : "Usa"
+
 @enduml
