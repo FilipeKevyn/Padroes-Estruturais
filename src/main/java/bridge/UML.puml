@@ -1,0 +1,35 @@
+@startuml
+
+interface MensagemImplementacao {
+    + enviarMensagem(mensagem: String)
+}
+
+class MensagemEmail implements MensagemImplementacao {
+    + enviarMensagem(mensagem: String)
+}
+
+class MensagemSMS implements MensagemImplementacao {
+    + enviarMensagem(mensagem: String)
+}
+
+abstract class Notificacao {
+    # mensagem: MensagemImplementacao
+    + Notificacao(mensagem: MensagemImplementacao)
+    + enviar(mensagem: String)
+}
+
+class NotificacaoNormal extends Notificacao {
+    + enviar(mensagem: String)
+}
+
+class NotificacaoUrgente extends Notificacao {
+    + enviar(mensagem: String)
+}
+
+MensagemImplementacao <|.. MensagemEmail
+MensagemImplementacao <|.. MensagemSMS
+Notificacao <|-- NotificacaoNormal
+Notificacao <|-- NotificacaoUrgente
+Notificacao ..> MensagemImplementacao : "Usa"
+
+@enduml
