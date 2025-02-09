@@ -1,0 +1,26 @@
+@startuml
+
+interface ComponenteArquivo {
+    + exibir(indentacao: String)
+}
+
+class Arquivo implements ComponenteArquivo {
+    - nome: String
+    + Arquivo(nome: String)
+    + exibir(indentacao: String)
+}
+
+class Pasta implements ComponenteArquivo {
+    - nome: String
+    - componentes: List<ComponenteArquivo>
+    + Pasta(nome: String)
+    + adicionar(componente: ComponenteArquivo)
+    + remover(componente: ComponenteArquivo)
+    + exibir(indentacao: String)
+}
+
+ComponenteArquivo <|.. Arquivo
+ComponenteArquivo <|.. Pasta
+Pasta ..> ComponenteArquivo : "Usa"
+
+@enduml
