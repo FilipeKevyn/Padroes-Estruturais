@@ -1,0 +1,30 @@
+@startuml
+interface Produto {
+    + exibirDetalhes()
+}
+
+class ProdutoConcreto {
+    - nome: String
+    - categoria: String
+    - preco: double
+    + ProdutoConcreto(nome: String, categoria: String, preco: double)
+    + exibirDetalhes()
+}
+
+class FabricaDeProdutos {
+    - produtos: Map<String, Produto>
+    + obterProduto(nome: String, categoria: String, preco: double): Produto
+}
+
+class Pedido {
+    - produto: Produto
+    - quantidade: int
+    + Pedido(nomeProduto: String, categoriaProduto: String, precoProduto: double, quantidade: int)
+    + exibirDetalhesPedido()
+}
+
+Produto <|.. ProdutoConcreto
+FabricaDeProdutos ..> ProdutoConcreto : "Usa"
+Pedido ..> Produto : "Usa"
+Pedido ..> FabricaDeProdutos : "Usa"
+@enduml
