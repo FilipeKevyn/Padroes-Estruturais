@@ -17,13 +17,9 @@ class PagamentoPayPalAdapter implements Pagamento {
     + processarPagamento(valor: double)
 }
 
-class Main {
-    + main(args: String[])
-}
-
 Pagamento <|.. PagamentoBanco
 Pagamento <|.. PagamentoPayPalAdapter
 PagamentoPayPalAdapter ..> PagamentoPayPal : "Adapta chamada para"
-Main ..> Pagamento : "Usa"
+
 
 @enduml
