@@ -1,0 +1,37 @@
+@startuml
+
+interface Cafe {
+    + servir(): String
+    + custo(): double
+}
+
+class CafeSimples implements Cafe {
+    + servir(): String
+    + custo(): double
+}
+
+abstract class CafeDecorator implements Cafe {
+    - cafe: Cafe
+    + CafeDecorator(cafe: Cafe)
+    + servir(): String
+    + custo(): double
+}
+
+class CafeComLeite extends CafeDecorator {
+    + CafeComLeite(cafe: Cafe)
+    + servir(): String
+    + custo(): double
+}
+
+class CafeComAcucar extends CafeDecorator {
+    + CafeComAcucar(cafe: Cafe)
+    + servir(): String
+    + custo(): double
+}
+
+Cafe <|.. CafeSimples
+CafeDecorator <|.. CafeComLeite
+CafeDecorator <|.. CafeComAcucar
+CafeDecorator ..> Cafe : "Usa"
+
+@enduml
